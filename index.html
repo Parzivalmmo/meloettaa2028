@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía de Revanchas de Gimnasios - PokéMMO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Tema 1: Oscuro Clásico (Por defecto) */
+      --bg-body: #0b0d12;
+      --bg-surface: #141821;
+      --bg-card: #1a202c;
+      --bg-card-hover: #222938;
+      --border-color: #2d3748;
+      --text-main: #f7fafc;
+      --text-muted: #a0aec0;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.15);
+      --heal-bg: rgba(16, 185, 129, 0.15);
+      --heal-border: #10b981;
+      --heal-text: #34d399;
+      --warn-bg: rgba(245, 158, 11, 0.15);
+      --warn-border: #f59e0b;
+      --warn-text: #fbbf24;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Tema 2: PokéMMO Cristal */
+    [data-theme="crystal"] {
+      --bg-body: #09131f;
+      --bg-surface: #0f2136;
+      --bg-card: #142c47;
+      --bg-card-hover: #1a3859;
+      --border-color: #254e7a;
+      --text-main: #f0f7ff;
+      --text-muted: #93c5fd;
+      --accent: #60a5fa;
+      --accent-soft: rgba(96, 165, 250, 0.18);
+      --heal-bg: rgba(52, 211, 153, 0.15);
+      --heal-border: #34d399;
+      --heal-text: #6ee7b7;
+      --warn-bg: rgba(251, 191, 36, 0.15);
+      --warn-border: #fbbf24;
+      --warn-text: #fde68a;
+      --shadow: 0 8px 24px rgba(2, 12, 27, 0.6);
+    }
+
+    /* Tema 3: Noche Neón (Cyberpunk) */
+    [data-theme="neon"] {
+      --bg-body: #090514;
+      --bg-surface: #130b29;
+      --bg-card: #1c113b;
+      --bg-card-hover: #26184f;
+      --border-color: #4c1d95;
+      --text-main: #fdf4ff;
+      --text-muted: #d8b4fe;
+      --accent: #f472b6;
+      --accent-soft: rgba(244, 114, 182, 0.18);
+      --heal-bg: rgba(45, 212, 191, 0.15);
+      --heal-border: #2dd4bf;
+      --heal-text: #5eead4;
+      --warn-bg: rgba(250, 204, 21, 0.15);
+      --warn-border: #facc15;
+      --warn-text: #fef08a;
+      --shadow: 0 8px 28px rgba(139, 92, 246, 0.25);
+    }
+
+    /* Tema 4: Bosque Esmeralda */
+    [data-theme="emerald"] {
+      --bg-body: #07140e;
+      --bg-surface: #0e241a;
+      --bg-card: #143325;
+      --bg-card-hover: #1b4230;
+      --border-color: #275e45;
+      --text-main: #ecfdf5;
+      --text-muted: #a7f3d0;
+      --accent: #34d399;
+      --accent-soft: rgba(52, 211, 153, 0.18);
+      --heal-bg: rgba(163, 230, 53, 0.15);
+      --heal-border: #a3e635;
+      --heal-text: #bef264;
+      --warn-bg: rgba(251, 146, 60, 0.18);
+      --warn-border: #fb923c;
+      --warn-text: #fed7aa;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Tema 5: Volcán Magma */
+    [data-theme="magma"] {
+      --bg-body: #140808;
+      --bg-surface: #241010;
+      --bg-card: #331616;
+      --bg-card-hover: #421d1d;
+      --border-color: #6b2828;
+      --text-main: #fff5f5;
+      --text-muted: #feb2b2;
+      --accent: #f87171;
+      --accent-soft: rgba(248, 113, 113, 0.18);
+      --heal-bg: rgba(52, 211, 153, 0.15);
+      --heal-border: #34d399;
+      --heal-text: #6ee7b7;
+      --warn-bg: rgba(251, 191, 36, 0.18);
+      --warn-border: #fbbf24;
+      --warn-text: #fde68a;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+    }
+
+    /* Tema 6: Modo Claro Limpio */
+    [data-theme="light"] {
+      --bg-body: #f1f5f9;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f8fafc;
+      --border-color: #cbd5e1;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.1);
+      --heal-bg: #dcfce7;
+      --heal-border: #16a34a;
+      --heal-text: #15803d;
+      --warn-bg: #fef3c7;
+      --warn-border: #d97706;
+      --warn-text: #b45309;
+      --shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+    }
+
+    /* Colores de Equipo Pokémon (Código de color original adaptado) */
+    .pk-blastoise { color: #60a5fa; font-weight: 700; }
+    .pk-vanilluxe { color: #22d3ee; font-weight: 700; }
+    .pk-heatran   { color: #fb923c; font-weight: 700; }
+    .pk-typhlosion{ color: #f87171; font-weight: 700; }
+    .pk-meloetta  { color: #f472b6; font-weight: 700; }
+    .pk-weezing   { color: #c084fc; font-weight: 700; }
+
+    [data-theme="light"] .pk-blastoise { color: #1d4ed8; }
+    [data-theme="light"] .pk-vanilluxe { color: #0891b2; }
+    [data-theme="light"] .pk-heatran   { color: #c2410c; }
+    [data-theme="light"] .pk-typhlosion{ color: #b91c1c; }
+    [data-theme="light"] .pk-meloetta  { color: #be185d; }
+    [data-theme="light"] .pk-weezing   { color: #7e22ce; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.55;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      padding-bottom: 4rem;
+    }
+
+    /* Barra Superior */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow);
+      padding: 0.9rem 1.5rem;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand h1 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .search-box, .theme-select {
+      background: var(--bg-body);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.5rem 0.85rem;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-box:focus, .theme-select:focus {
+      border-color: var(--accent);
+    }
+
+    .search-box { width: 230px; }
+
+    /* Leyenda del Equipo */
+    .team-bar {
+      max-width: 1200px;
+      margin: 1.25rem auto 0.75rem;
+      padding: 0 1.5rem;
+    }
+
+    .team-legend {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      box-shadow: var(--shadow);
+    }
+
+    .team-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .team-members {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .member-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      padding: 0.2rem 0.75rem 0.2rem 0.35rem;
+      font-size: 0.85rem;
+    }
+
+    .member-chip img {
+      width: 28px;
+      height: 28px;
+      image-rendering: pixelated;
+      object-fit: contain;
+    }
+
+    /* Pestañas de Regiones */
+    .tabs-nav {
+      max-width: 1200px;
+      margin: 0 auto 1.5rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tab-btn {
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+    }
+
+    .tab-btn.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* Contenido Principal */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .region-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .region-section.hidden {
+      display: none;
+    }
+
+    .region-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .region-header h2 {
+      font-size: 1.55rem;
+      font-weight: 800;
+    }
+
+    .region-badge {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 6px;
+    }
+
+    .gyms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.15rem;
+    }
+
+    /* Tarjetas de Gimnasio */
+    .gym-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.15rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.15s ease, background-color 0.2s ease;
+    }
+
+    .gym-card:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .gym-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .gym-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .badge-optional {
+      background: rgba(148, 163, 184, 0.2);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 5px;
+      text-transform: uppercase;
+    }
+
+    .badge-type {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.15rem 0.55rem;
+      border-radius: 5px;
+    }
+
+    .type-grass { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+    .type-water { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    .type-fire  { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+
+    .default-lead {
+      background: var(--bg-surface);
+      border-left: 3px solid var(--accent);
+      padding: 0.55rem 0.75rem;
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+      font-size: 0.93rem;
+    }
+
+    .matchup-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .matchup-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.91rem;
+    }
+
+    .vs-header {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: var(--text-main);
+    }
+
+    .poke-sprite {
+      width: 30px;
+      height: 30px;
+      image-rendering: pixelated;
+      vertical-align: middle;
+      margin: -4px 1px;
+    }
+
+    .sub-turns {
+      list-style: none;
+      margin-top: 0.35rem;
+      padding-left: 0.75rem;
+      border-left: 2px dashed var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: 0.88rem;
+    }
+
+    .turn-tag {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.76rem;
+      padding: 0.05rem 0.4rem;
+      border-radius: 4px;
+      margin-right: 0.25rem;
+    }
+
+    .priority-note {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+      font-style: italic;
+    }
+
+    /* Alertas de Curación y Objetos */
+    .alert-banner {
+      margin-top: 1rem;
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .alert-heal {
+      background: var(--heal-bg);
+      border: 1px solid var(--heal-border);
+      color: var(--heal-text);
+    }
+
+    .alert-item {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      color: var(--warn-text);
+    }
+
+    @media (max-width: 600px) {
+      .gyms-grid { grid-template-columns: 1fr; }
+      .search-box { width: 100%; }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <header>
+    <div class="header-container">
+      <div class="brand">
+        <img src="https://img.pokemondb.net/sprites/items/vs-seeker.png" alt="Buscapelea" class="poke-sprite" onerror="this.style.display='none'">
+        <h1>Ruta de Gimnasios PokéMMO</h1>
+      </div>
+      <div class="controls">
+        <input type="text" id="searchInput" class="search-box" placeholder="Buscar líder, ciudad o Pokémon..." />
+        <select id="themeSelector" class="theme-select" aria-label="Seleccionar tema">
+          <option value="dark">Tema: Oscuro Clásico</option>
+          <option value="crystal">Tema: PokéMMO Cristal</option>
+          <option value="neon">Tema: Noche Neón</option>
+          <option value="emerald">Tema: Bosque Esmeralda</option>
+          <option value="magma">Tema: Volcán Magma</option>
+          <option value="light">Tema: Modo Claro</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- Leyenda del Equipo -->
+  <section class="team-bar">
+    <div class="team-legend">
+      <span class="team-title">Código de color del equipo:</span>
+      <div class="team-members">
+        <span class="member-chip"><img src="https://img.pokemondb.net/sprites/black-white/normal/blastoise.png" alt="Blastoise"><span class="pk-blastoise">Blastoise</span></span>
+        <span class="member-chip"><img src="https://img.pokemondb.net/sprites/black-white/normal/vanilluxe.png" alt="Vanilluxe"><span class="pk-vanilluxe">Vanilluxe</span></span>
+        <span class="member-chip"><img src="https://img.pokemondb.net/sprites/black-white/normal/heatran.png" alt="Heatran"><span class="pk-heatran">Heatran</span></span>
+        <span class="member-chip"><img src="https://img.pokemondb.net/sprites/black-white/normal/typhlosion.png" alt="Typhlosion"><span class="pk-typhlosion">Typhlosion</span></span>
+        <span class="member-chip"><img src="https://img.pokemondb.net/sprites/black-white/normal/meloetta.png" alt="Meloetta"><span class="pk-meloetta">Meloetta</span></span>
+        <span class="member-chip"><img src="https://img.pokemondb.net/sprites/black-white/normal/weezing.png" alt="Weezing"><span class="pk-weezing">Weezing</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navegación por Región -->
+  <nav class="tabs-nav">
+    <button class="tab-btn active" data-region="all">Todas las Regiones</button>
+    <button class="tab-btn" data-region="hoenn">1. Hoenn</button>
+    <button class="tab-btn" data-region="teselia">2. Teselia</button>
+    <button class="tab-btn" data-region="kanto">3. Kanto</button>
+    <button class="tab-btn" data-region="johto">4. Johto</button>
+    <button class="tab-btn" data-region="sinnoh">5. Sinnoh</button>
+  </nav>
+
+  <main>
+
+    <!-- ==================== 1. HOENN ==================== -->
+    <section class="region-section" data-region="hoenn">
+      <div class="region-header">
+        <h2>1. Hoenn</h2>
+        <span class="region-badge">Inicio de Ruta</span>
+      </div>
+
+      <div class="gyms-grid">
+        <!-- Lavacalda -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/torkoal.png" alt="Torkoal" class="poke-sprite">
+              1. Pueblo Lavacalda (Candela)
+            </div>
+          </div>
+          <div class="default-lead">
+            <strong>Lead:</strong> <span class="pk-blastoise">Blastoise</span> + <span class="pk-vanilluxe">Vanilluxe</span><br>
+            <strong>Base:</strong> <span class="pk-vanilluxe">Danza Lluvia</span> + <span class="pk-blastoise">Salpicar</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/houndoom.png" class="poke-sprite" alt="Houndoom"> Vs. Houndoom:</div>
+              <span class="pk-blastoise">Salpicar</span> + <span class="pk-vanilluxe">Vozarrón</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/arcanine.png" class="poke-sprite" alt="Arcanine"> Vs. Arcanine Nv. 85:</div>
+              <span class="pk-blastoise">Salpicar</span> + <span class="pk-vanilluxe">Danza Lluvia</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2</span> <span class="pk-blastoise">Salpicar</span> + <span class="pk-vanilluxe">At. Esp. X</span> [en <span class="pk-blastoise">Blastoise</span>]</li>
+                <li><span class="turn-tag">T3</span> <span class="pk-blastoise">Salpicar</span> + <span class="pk-vanilluxe">Danza Lluvia</span></li>
+              </ul>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Malvalona -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/manectric.png" alt="Manectric" class="poke-sprite">
+              2. Ciudad Malvalona (Erico)
+            </div>
+          </div>
+          <div class="default-lead">
+            <strong>Base:</strong> <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Vozarrón</span>
+          </div>
+        </article>
+
+        <!-- Azuliza -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/hariyama.png" alt="Hariyama" class="poke-sprite">
+              3. Pueblo Azuliza (Marcial)
+            </div>
+          </div>
+          <div class="default-lead">
+            <strong>Base:</strong> <span class="pk-blastoise">Salpicar</span> + <span class="pk-vanilluxe">Ventisca</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/staraptor.png" class="poke-sprite" alt="Staraptor">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/hitmontop.png" class="poke-sprite" alt="Hitmontop">
+                Vs. Staraptor Y Hitmontop:
+              </div>
+              <span class="pk-blastoise">At. Esp. X</span> + <span class="pk-vanilluxe">Ventisca</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2, T3</span> <span class="pk-blastoise">Salpicar</span> + <span class="pk-vanilluxe">Ventisca</span></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="alert-banner alert-heal">
+            💚 [CURACIÓN #1 o Baya Zanama en Salpicar]
+          </div>
+        </article>
+
+        <!-- Férrica -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/nosepass.png" alt="Nosepass" class="poke-sprite">
+              4. Ciudad Férrica (Petra)
+            </div>
+          </div>
+          <div class="default-lead">
+            <strong>Base:</strong> <span class="pk-blastoise">Salpicar</span> + <span class="pk-weezing">Buena Baza</span>
+          </div>
+        </article>
+
+        <!-- Petalia -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/slaking.png" alt="Slaking" class="poke-sprite">
+              5. Ciudad Petalia (Norman)
+            </div>
+            <span class="badge-optional">¡Opcional!</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/spinda.png" class="poke-sprite" alt="Spinda">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/blissey.png" class="poke-sprite" alt="Blissey">
+                Vs. Spinda / Blissey:
+              </div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-typhlosion">Humareda</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/chansey.png" class="poke-sprite" alt="Chansey"> Vs. Chansey:</div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-typhlosion">At. Esp. X</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2, T3, T4</span> <span class="pk-heatran">Estallido</span> + <span class="pk-typhlosion">Humareda</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/kecleon.png" class="poke-sprite" alt="Kecleon"> Vs. Kecleon:</div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-typhlosion">At. Esp. X</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2, T3</span> <span class="pk-heatran">Estallido</span> + <span class="pk-typhlosion">Humareda</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/stantler.png" class="poke-sprite" alt="Stantler"> Vs. Stantler:</div>
+              <span class="pk-heatran">Humareda</span> + <span class="pk-typhlosion">Humareda</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Arborada -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/altaria.png" alt="Altaria" class="poke-sprite">
+              6. Ciudad Arborada (Alana)
+            </div>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/pelipper.png" class="poke-sprite" alt="Pelipper"> Vs. Pelipper:</div>
+              <span class="pk-blastoise">Refuerzo</span> + <span class="pk-weezing">Explosión</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2</span> <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-meloetta">Vozarrón</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/swellow.png" class="poke-sprite" alt="Swellow"> Vs. Swellow:</div>
+              <span class="pk-blastoise">Sorpresa</span> + <span class="pk-weezing">Explosión</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2</span> <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-meloetta">Vozarrón</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/masquerain.png" class="poke-sprite" alt="Masquerain"> Vs. Masquerain:</div>
+              <span class="pk-blastoise">Refuerzo</span> + <span class="pk-weezing">Explosión</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2</span> <span class="pk-meloetta">Vozarrón</span> + <span class="pk-vanilluxe">Rayo Hielo</span> (¡Altaria / Noctowl!)</li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header">Otro caso:</div>
+              <span class="pk-blastoise">Salpicar</span> + <span class="pk-weezing">Explosión</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2</span> <span class="pk-meloetta">Vozarrón</span> + <span class="pk-vanilluxe">Ventisca</span></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="alert-banner alert-heal">
+            💚 [CURACIÓN #2]
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== 2. TESELIA ==================== -->
+    <section class="region-section" data-region="teselia">
+      <div class="region-header">
+        <h2>2. Teselia (Unova)</h2>
+        <span class="region-badge">8 Gimnasios</span>
+      </div>
+
+      <div class="gyms-grid">
+        <!-- Porcelana -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/leavanny.png" alt="Leavanny" class="poke-sprite">
+              1. Ciudad Porcelana (Camus)
+            </div>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/gliscor.png" class="poke-sprite" alt="Gliscor"> Vs. Gliscor:</div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-blastoise">Burbuja</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/shuckle.png" class="poke-sprite" alt="Shuckle">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/volcarona.png" class="poke-sprite" alt="Volcarona">
+                Vs. Shuckle / Volcarona:
+              </div>
+              <span class="pk-heatran">Calcinación</span> + <span class="pk-blastoise">Salpicar</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/flygon.png" class="poke-sprite" alt="Flygon"> Flygon / Otro:</div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-blastoise">Salpicar</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Mayólica -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/zebstrika.png" alt="Zebstrika" class="poke-sprite">
+              2. Ciudad Mayólica (Camila)
+            </div>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/milotic.png" class="poke-sprite" alt="Milotic"> Vs. Milotic:</div>
+              <span class="pk-blastoise">At. Esp. X</span> + <span class="pk-meloetta">Vozarrón</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2</span> Cambiar <span class="pk-blastoise">Blastoise</span> por <span class="pk-typhlosion">Typhlosion</span> + <span class="pk-meloetta">Vozarrón</span></li>
+                <li><span class="turn-tag">T3</span> <span class="pk-typhlosion">Estallido</span> + <span class="pk-meloetta">Vozarrón</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/emolga.png" class="poke-sprite" alt="Emolga"> Vs. Emolga:</div>
+              <span class="pk-blastoise">Salpicar</span> + <span class="pk-meloetta">Vozarrón</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2</span> <span class="pk-blastoise">Salpicar</span> + <span class="pk-meloetta">At. Esp. X</span></li>
+                <li><span class="turn-tag">T3</span> <span class="pk-blastoise">Salpicar</span> + <span class="pk-meloetta">Vozarrón</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/stunfisk.png" class="poke-sprite" alt="Stunfisk"> Vs. Stunfisk:</div>
+              <span class="pk-blastoise">Salpicar</span> + Cambiar <span class="pk-meloetta">Meloetta</span> por <span class="pk-vanilluxe">Vanilluxe</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2, T3</span> <span class="pk-blastoise">Salpicar</span> + <span class="pk-vanilluxe">Vozarrón</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/galvantula.png" class="poke-sprite" alt="Galvantula"> Galvantula / 2x Intimidación:</div>
+              <span class="pk-blastoise">Salpicar</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+          </ul>
+          <div class="alert-banner alert-heal">
+            🍇 [Baya Zanama en Salpicar]
+          </div>
+        </article>
+
+        <!-- Fayenza -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/excadrill.png" alt="Excadrill" class="poke-sprite">
+              3. Ciudad Fayenza (Yakón)
+            </div>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/sandslash.png" class="poke-sprite" alt="Sandslash"> Vs. Sandslash:</div>
+              <span class="pk-vanilluxe">Danza Lluvia</span> + <span class="pk-blastoise">Salpicar</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/steelix.png" class="poke-sprite" alt="Steelix"> Vs. Steelix:</div>
+              Cambiar <span class="pk-vanilluxe">Vanilluxe</span> por <span class="pk-weezing">Weezing</span> + <span class="pk-blastoise">Salpicar</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2, T3</span> <span class="pk-weezing">Buena Baza</span> + <span class="pk-blastoise">Salpicar</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/torterra.png" class="poke-sprite" alt="Torterra"> Vs. Torterra:</div>
+              <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-blastoise">Salpicar</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2</span> Cambiar <span class="pk-vanilluxe">Vanilluxe</span> por <span class="pk-meloetta">Meloetta</span> + <span class="pk-blastoise">Salpicar</span></li>
+                <li><span class="turn-tag">T3</span> <span class="pk-meloetta">Vozarrón</span> + <span class="pk-blastoise">Salpicar</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/excadrill.png" class="poke-sprite" alt="Excadrill"> Vs. Excadrill:</div>
+              Cambiar <span class="pk-vanilluxe">Vanilluxe</span> por <span class="pk-weezing">Weezing</span> + <span class="pk-blastoise">Salpicar</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2 (Con Flygon)</span> <span class="pk-weezing">At. Esp. X</span> + <span class="pk-blastoise">Salpicar</span></li>
+                <li><span class="turn-tag">T2 (Sin Flygon)</span> <span class="pk-weezing">Danza Lluvia</span> + <span class="pk-blastoise">Salpicar</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/seismitoad.png" class="poke-sprite" alt="Seismitoad"> Vs. Seismitoad:</div>
+              <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-blastoise">At. Esp. X</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2, T3</span> <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-blastoise">Burbuja</span></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="alert-banner alert-heal">
+            💚 [Cuidado: Curar al atacante de Agua a vida completa]
+          </div>
+        </article>
+
+        <!-- Loza -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/swanna.png" alt="Swanna" class="poke-sprite">
+              4. Ciudad Loza (Gerania)
+            </div>
+          </div>
+          <div class="default-lead">
+            <strong>Base:</strong> <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-blastoise">Salpicar</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/unfezant.png" class="poke-sprite" alt="Unfezant"> Vs. Unfezant:</div>
+              <span class="pk-vanilluxe">Vozarrón</span> + <span class="pk-blastoise">Salpicar</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/pelipper.png" class="poke-sprite" alt="Pelipper">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/swanna.png" class="poke-sprite" alt="Swanna">
+                Si ves Pelipper + Swanna:
+              </div>
+              <span class="pk-vanilluxe">Vozarrón</span> + <span class="pk-blastoise">Salpicar</span>
+              <ul class="sub-turns">
+                <li><strong>Si salta Tarjeta Roja:</strong> <span class="pk-vanilluxe">Ataque en área</span> + <span class="pk-blastoise">Salpicar</span></li>
+                <li><strong>Si no salta:</strong> <span class="pk-vanilluxe">At. Esp. X</span> + <span class="pk-blastoise">Salpicar</span></li>
+              </ul>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Teja -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/beartic.png" alt="Beartic" class="poke-sprite">
+              5. Ciudad Teja (Junco)
+            </div>
+          </div>
+          <div class="default-lead">
+            <strong>Base:</strong> <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Precisión X</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header">Turnos siguientes:</div>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2, T3</span> <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Humareda</span></li>
+                <li><strong>Sin gastar objetos (Riesgo):</strong> <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Humareda</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/beartic.png" class="poke-sprite" alt="Beartic"> Vs. Beartic:</div>
+              <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Estallido</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2</span> <span class="pk-typhlosion">Precisión X</span> + <span class="pk-heatran">Estallido</span></li>
+                <li><span class="turn-tag">T3</span> <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Estallido</span></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="alert-banner alert-heal">
+            💚 [Prestar atención a los PP de <span class="pk-heatran">Heatran</span>]
+          </div>
+        </article>
+
+        <!-- Gres -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/simisage.png" alt="Simisage" class="poke-sprite">
+              6. Ciudad Gres (Trío)
+            </div>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><span class="badge-type type-grass">Planta / Millo</span></div>
+              <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">Calcinación</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><span class="badge-type type-water">Agua / Maíz</span></div>
+              <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">At. Esp. X</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2, T3</span> <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">Buena Baza</span></li>
+                <li><strong>Vs. Slowbro:</strong> <span class="pk-typhlosion">Calcinación</span> + <span class="pk-weezing">Explosión</span> &rarr; <span class="turn-tag">T2, T3</span> <span class="pk-blastoise">Refuerzo</span> + <span class="pk-meloetta">Vozarrón</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><span class="badge-type type-fire">Fuego / Zeo</span></div>
+              <span class="pk-vanilluxe">Danza Lluvia</span> + <span class="pk-blastoise">Salpicar</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2</span> <span class="pk-vanilluxe">Baya Zanama</span> en <span class="pk-blastoise">Salpicar</span> + <span class="pk-blastoise">Salpicar</span></li>
+              </ul>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Esmalte -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/watchog.png" alt="Watchog" class="poke-sprite">
+              7. Ciudad Esmalte (Aloe)
+            </div>
+            <span class="badge-optional">Opcional</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/chansey.png" class="poke-sprite" alt="Chansey">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/blissey.png" class="poke-sprite" alt="Blissey">
+                Vs. Doble Huevo (Chansey/Blissey):
+              </div>
+              <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">Explosión</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2, T3</span> <span class="pk-blastoise">Salpicar</span> + <span class="pk-vanilluxe">Ventisca</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/stantler.png" class="poke-sprite" alt="Stantler">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/dragonite.png" class="poke-sprite" alt="Dragonite">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/braviary.png" class="poke-sprite" alt="Braviary">
+                Vs. Stantler / Dragonite / Braviary:
+              </div>
+              <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">Buena Baza</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/snorlax.png" class="poke-sprite" alt="Snorlax"> Vs. Snorlax:</div>
+              <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">At. Esp. X</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2, T3</span> <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">Buena Baza</span></li>
+              </ul>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Caolín -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/haxorus.png" alt="Haxorus" class="poke-sprite">
+              8. Ciudad Caolín (Lirio / Iris)
+            </div>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/serperior.png" class="poke-sprite" alt="Serperior">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/dragonite.png" class="poke-sprite" alt="Dragonite">
+                Vs. Serperior / Dragonite:
+              </div>
+              <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/aggron.png" class="poke-sprite" alt="Aggron"> Vs. Aggron:</div>
+              <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-meloetta">Psíquico</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/druddigon.png" class="poke-sprite" alt="Druddigon"> Vs. Druddigon:</div>
+              <span class="pk-vanilluxe">At. Esp. X</span> + <span class="pk-meloetta">Vozarrón</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2, T3</span> <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-meloetta">Vozarrón</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/hydreigon.png" class="poke-sprite" alt="Hydreigon"> Vs. Hydreigon:</div>
+              <ul class="sub-turns">
+                <li><strong>Método 1:</strong> <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-meloetta">Rayo</span> <span class="priority-note">(Priorizar Aggron + Haxorus)</span></li>
+                <li><strong>Método 2:</strong> <span class="pk-vanilluxe">Ventisca</span> + Cambiar <span class="pk-meloetta">Meloetta</span> por <span class="pk-typhlosion">Typhlosion</span> &rarr; <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-typhlosion">Estallido</span></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="alert-banner alert-heal">
+            💚 [CURACIÓN #3]
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== 3. KANTO ==================== -->
+    <section class="region-section" data-region="kanto">
+      <div class="region-header">
+        <h2>3. Kanto</h2>
+        <span class="region-badge">6 Gimnasios</span>
+      </div>
+
+      <div class="gyms-grid">
+        <!-- Carmín -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/raichu.png" alt="Raichu" class="poke-sprite">
+              1. Ciudad Carmín (Lt. Surge)
+            </div>
+          </div>
+          <div class="default-lead">
+            <strong>Base:</strong> <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Vozarrón</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header">Si hay Llovizna (Drizzle):</div>
+              <span class="pk-heatran">At. Esp. X</span> + <span class="pk-meloetta">Vozarrón</span> &rarr; <span class="pk-heatran">Cualquier ataque</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Azafrán -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/alakazam.png" alt="Alakazam" class="poke-sprite">
+              2. Ciudad Azafrán (Sabrina)
+            </div>
+            <span class="badge-optional">Opcional</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/metagross.png" class="poke-sprite" alt="Metagross"> Vs. Metagross:</div>
+              <span class="pk-typhlosion">Estallido</span> + Cambiar <span class="pk-weezing">Weezing</span> por <span class="pk-blastoise">Blastoise</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2, T3</span> <span class="pk-typhlosion">Estallido</span> + <span class="pk-blastoise">Salpicar</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/slowking.png" class="poke-sprite" alt="Slowking">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/lapras.png" class="poke-sprite" alt="Lapras">
+                Vs. Slowking / Lapras:
+              </div>
+              <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">Buena Baza</span> (4 Turnos)
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/scizor.png" class="poke-sprite" alt="Scizor"> Vs. Scizor:</div>
+              <span class="pk-typhlosion">Estallido</span> + Cambiar <span class="pk-weezing">Weezing</span> por <span class="pk-meloetta">Meloetta</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2, T3</span> <span class="pk-typhlosion">Estallido</span> + <span class="pk-meloetta">Vozarrón</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/snorlax.png" class="poke-sprite" alt="Snorlax"> Vs. Snorlax:</div>
+              <ul class="sub-turns">
+                <li><strong>Método 1:</strong> <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">At. Esp. X</span> &rarr; <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">Velocidad X</span></li>
+                <li><strong>Método 2:</strong> <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">Explosión</span> &rarr; <span class="pk-meloetta">Vozarrón</span> + <span class="pk-blastoise">Refuerzo</span></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="alert-banner alert-heal">
+            💚 [CURACIÓN #4]
+          </div>
+          <div class="alert-banner alert-item">
+            ⚠️ ¡¡¡Equipa Gafas Elegidas (Choice Specs) a Heatran!!!
+          </div>
+        </article>
+
+        <!-- Azulona -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/vileplume.png" alt="Vileplume" class="poke-sprite">
+              3. Ciudad Azulona (Erika)
+            </div>
+          </div>
+          <div class="default-lead">
+            <strong>Base:</strong> <span class="pk-heatran">Estallido</span> + Cambiar <span class="pk-typhlosion">Typhlosion</span> por <span class="pk-weezing">Weezing</span> &rarr; <span class="pk-heatran">Estallido</span> + <span class="pk-weezing">Buena Baza</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/dragonite.png" class="poke-sprite" alt="Dragonite"> Vs. Dragonite:</div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-typhlosion">Humareda</span>
+              <ul class="sub-turns">
+                <li><span class="turn-tag">T2</span> Cambiar <span class="pk-typhlosion">Typhlosion</span> por <span class="pk-weezing">Weezing</span> &rarr; <span class="pk-heatran">Estallido</span> + <span class="pk-weezing">Buena Baza</span></li>
+              </ul>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Fucsia -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/weezing.png" alt="Weezing" class="poke-sprite">
+              4. Ciudad Fucsia (Koga / Sachiko)
+            </div>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/ariados.png" class="poke-sprite" alt="Ariados">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/beedrill.png" class="poke-sprite" alt="Beedrill">
+                Vs. Ariados / Beedrill:
+              </div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Ida y Vuelta</span> &rarr; <span class="pk-heatran">Estallido</span> + <span class="pk-weezing">Buena Baza</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/tentacruel.png" class="poke-sprite" alt="Tentacruel"> Vs. Tentacruel:</div>
+              <span class="pk-heatran">At. Esp. X</span> + <span class="pk-meloetta">Vozarrón</span> &rarr; <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/nidoqueen.png" class="poke-sprite" alt="Nidoqueen"> Vs. Nidoqueen:</div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Velocidad X</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/zoroark.png" class="poke-sprite" alt="Zoroark"> Falso (Zoroark):</div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/gengar.png" class="poke-sprite" alt="Gengar">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/electrode.png" class="poke-sprite" alt="Electrode">
+                Real (Estándar - Gengar + Electrode):
+              </div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Ida y Vuelta</span> (en Gengar) &rarr; <span class="pk-heatran">Estallido</span> + <span class="pk-vanilluxe">Ventisca</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header">Real (Inesperado - Gengar + Volador):</div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Ida y Vuelta</span> (en Gengar) &rarr; <span class="pk-typhlosion">Humareda</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header">Real (Inesperado - Sin Gengar):</div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Rayo</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Plateada -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/onix.png" alt="Onix" class="poke-sprite">
+              5. Ciudad Plateada (Brock)
+            </div>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/toxicroak.png" class="poke-sprite" alt="Toxicroak"> Vs. Toxicroak:</div>
+              <span class="pk-blastoise">Salpicar</span> + <span class="pk-weezing">Buena Baza</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/tyranitar.png" class="poke-sprite" alt="Tyranitar">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/golem.png" class="poke-sprite" alt="Golem">
+                Vs. Tyranitar + Golem:
+              </div>
+              <span class="pk-blastoise">Salpicar</span> + <span class="pk-weezing">Precisión X</span> &rarr; <span class="pk-blastoise">Salpicar</span> + <span class="pk-weezing">Buena Baza</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/swampert.png" class="poke-sprite" alt="Swampert"> Vs. Swampert:</div>
+              <span class="pk-blastoise">Salpicar</span> + <span class="pk-weezing">Buena Baza</span>
+              <span class="priority-note">(Priorizar Steelix &gt; Crobat)</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/ludicolo.png" class="poke-sprite" alt="Ludicolo"> Vs. Ludicolo:</div>
+              <span class="pk-blastoise">Salpicar</span> + <span class="pk-weezing">Buena Baza</span>
+              <span class="priority-note">(Priorizar Kabutops &gt; Pez)</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/slowbro.png" class="poke-sprite" alt="Slowbro"> Vs. Slowbro:</div>
+              <span class="pk-blastoise">Salpicar</span> + <span class="pk-weezing">Explosión</span> &rarr; <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Celeste -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/starmie.png" alt="Starmie" class="poke-sprite">
+              6. Ciudad Celeste (Misty)
+            </div>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><span class="badge-type type-water">Modo Rápido (Buscando Velocidad)</span></div>
+              <ul class="sub-turns">
+                <li><strong><img src="https://img.pokemondb.net/sprites/black-white/normal/carracosta.png" class="poke-sprite" alt="Carracosta"> Vs. Carracosta:</strong> <span class="pk-meloetta">Rayo</span> (tortuga) + <span class="pk-weezing">Explosión</span> &rarr; <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Estallido</span></li>
+                <li><strong>Otro caso:</strong> <span class="pk-meloetta">Vozarrón</span> + <span class="pk-weezing">At. Esp. X</span> &rarr; <span class="pk-meloetta">Vozarrón</span> + <span class="pk-weezing">Calcinación</span></li>
+              </ul>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><span class="badge-type type-grass">Modo Ahorro (Ahorrar dinero / pociones)</span></div>
+              <ul class="sub-turns">
+                <li><strong><img src="https://img.pokemondb.net/sprites/black-white/normal/carracosta.png" class="poke-sprite" alt="Carracosta"> Vs. Carracosta:</strong> <span class="pk-blastoise">Salpicar</span> + <span class="pk-weezing">Explosión</span> &rarr; <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Estallido</span></li>
+                <li><strong><img src="https://img.pokemondb.net/sprites/black-white/normal/poliwrath.png" class="poke-sprite" alt="Poliwrath"> Vs. Poliwrath:</strong> <span class="pk-blastoise">Refuerzo</span> + <span class="pk-weezing">Explosión</span> &rarr; <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Humareda</span></li>
+                <li><strong><img src="https://img.pokemondb.net/sprites/black-white/normal/kingdra.png" class="poke-sprite" alt="Kingdra"> Vs. Kingdra:</strong> <span class="pk-blastoise">Refuerzo</span> + <span class="pk-weezing">Explosión</span> &rarr; <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-meloetta">Vozarrón</span></li>
+                <li><strong><img src="https://img.pokemondb.net/sprites/black-white/normal/golduck.png" class="poke-sprite" alt="Golduck"> Vs. Golduck:</strong> <span class="pk-blastoise">Refuerzo</span> + <span class="pk-weezing">Explosión</span> &rarr; <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Estallido</span></li>
+                <li><strong><img src="https://img.pokemondb.net/sprites/black-white/normal/floatzel.png" class="poke-sprite" alt="Floatzel"> Vs. Floatzel:</strong> <span class="pk-blastoise">Sorpresa</span> (a Floatzel) + <span class="pk-weezing">Explosión</span> &rarr; <span class="pk-meloetta">Vozarrón</span> + <span class="pk-heatran">Estallido</span></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="alert-banner alert-heal">
+            💚 [CURACIÓN #5]
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== 4. JOHTO ==================== -->
+    <section class="region-section" data-region="johto">
+      <div class="region-header">
+        <h2>4. Johto</h2>
+        <span class="region-badge">7 Gimnasios</span>
+      </div>
+
+      <div class="gyms-grid">
+        <!-- Olivo -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/steelix.png" alt="Steelix" class="poke-sprite">
+              1. Ciudad Olivo (Yasmina)
+            </div>
+          </div>
+          <div class="default-lead">
+            <strong>Base:</strong> <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">Buena Baza</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/metagross.png" class="poke-sprite" alt="Metagross"> Vs. Metagross:</div>
+              <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">At. Esp. X</span> &rarr; <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">Buena Baza</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/klinklang.png" class="poke-sprite" alt="Klinklang"> Vs. Klinklang:</div>
+              <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">Buena Baza</span>
+              <span class="priority-note">(Si sale Blastoise + Togekiss: <span class="pk-weezing">At. Esp. X</span> + <span class="pk-typhlosion">Estallido</span>)</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Trigal -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/miltank.png" alt="Miltank" class="poke-sprite">
+              2. Ciudad Trigal (Blanca)
+            </div>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/tauros.png" class="poke-sprite" alt="Tauros"> Vs. Tauros:</div>
+              <span class="pk-meloetta">Vozarrón</span> + <span class="pk-typhlosion">Calcinación</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/dodrio.png" class="poke-sprite" alt="Dodrio"> Vs. Dodrio:</div>
+              <span class="pk-meloetta">Vozarrón</span> + <span class="pk-typhlosion">Estallido</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/ambipom.png" class="poke-sprite" alt="Ambipom"> Vs. Ambipom:</div>
+              <span class="pk-typhlosion">Humareda</span> + <span class="pk-meloetta">Ida y Vuelta</span> (en Ambipom) &rarr; <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Humareda</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/cinccino.png" class="poke-sprite" alt="Cinccino"> Vs. Cinccino:</div>
+              <span class="pk-typhlosion">Estallido</span> + <span class="pk-meloetta">Ida y Vuelta</span> (a Excadrill) &rarr; <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">Buena Baza</span>
+              <span class="priority-note">(Priorizar Bibarel &gt; Blissey)</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/ursaring.png" class="poke-sprite" alt="Ursaring"> Vs. Ursaring:</div>
+              <span class="pk-typhlosion">Estallido</span> + Cambiar <span class="pk-meloetta">Meloetta</span> por <span class="pk-weezing">Weezing</span> &rarr; <span class="pk-typhlosion">Estallido</span> + <span class="pk-weezing">Buena Baza</span>
+            </li>
+          </ul>
+          <div class="alert-banner alert-heal">
+            🍇 [Baya Zanama en <span class="pk-typhlosion">Estallido</span> (2~ PP)]
+          </div>
+        </article>
+
+        <!-- Azalea -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/scizor.png" alt="Scizor" class="poke-sprite">
+              3. Pueblo Azalea (Antón)
+            </div>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/scizor.png" class="poke-sprite" alt="Scizor">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/forretress.png" class="poke-sprite" alt="Forretress">
+                Vs. Scizor + Forretress:
+              </div>
+              <span class="pk-meloetta">Ida y Vuelta</span> + <span class="pk-heatran">Humareda</span> &rarr; <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Humareda</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/ledian.png" class="poke-sprite" alt="Ledian">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/scyther.png" class="poke-sprite" alt="Scyther">
+                Vs. Ledian / Scyther:
+              </div>
+              Cambiar <span class="pk-meloetta">Meloetta</span> por <span class="pk-typhlosion">Typhlosion</span> + <span class="pk-heatran">Humareda</span> &rarr; <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Humareda</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/butterfree.png" class="poke-sprite" alt="Butterfree"> Vs. Butterfree:</div>
+              <span class="pk-meloetta">Ida y Vuelta</span> + <span class="pk-heatran">Humareda</span> &rarr; <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Humareda</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/beedrill.png" class="poke-sprite" alt="Beedrill"> Vs. Beedrill:</div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Ida y Vuelta</span> (sacar a <span class="pk-weezing">Weezing</span>) &rarr; <span class="pk-heatran">Estallido</span> + <span class="pk-weezing">At. Esp. X</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Caoba -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/piloswine.png" alt="Piloswine" class="poke-sprite">
+              4. Pueblo Caoba (Fredo)
+            </div>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/articuno.png" class="poke-sprite" alt="Articuno"> Vs. Articuno:</div>
+              <span class="pk-typhlosion">Día Soleado</span> + <span class="pk-heatran">Estallido</span> &rarr; Cambiar <span class="pk-typhlosion">Typhlosion</span> por <span class="pk-weezing">Weezing</span> &rarr; <span class="pk-weezing">Buena Baza</span> + <span class="pk-heatran">Estallido</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/mamoswine.png" class="poke-sprite" alt="Mamoswine"> Vs. Mamoswine:</div>
+              <span class="pk-heatran">Precisión X</span> + <span class="pk-typhlosion">Humareda</span> &rarr; <span class="pk-heatran">Humareda</span> + <span class="pk-typhlosion">Humareda</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/froslass.png" class="poke-sprite" alt="Froslass"> Vs. Froslass:</div>
+              <span class="pk-typhlosion">Día Soleado</span> + <span class="pk-heatran">Estallido</span> (4T?)
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/walrein.png" class="poke-sprite" alt="Walrein">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/dewgong.png" class="poke-sprite" alt="Dewgong">
+                Vs. Walrein / Dewgong:
+              </div>
+              <span class="pk-typhlosion">At. Esp. X</span> + <span class="pk-heatran">Estallido</span> &rarr; <span class="pk-typhlosion">Día Soleado</span> + <span class="pk-heatran">Estallido</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/glalie.png" class="poke-sprite" alt="Glalie"> Vs. Glalie:</div>
+              <span class="pk-typhlosion">Estallido</span> (probar <span class="pk-typhlosion">Humareda</span>) + Cambiar <span class="pk-heatran">Heatran</span> por <span class="pk-meloetta">Meloetta</span> &rarr; <span class="pk-typhlosion">Estallido</span> + <span class="pk-meloetta">Rayo</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Orquídea -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/poliwrath.png" alt="Poliwrath" class="poke-sprite">
+              5. Ciudad Orquídea (Aníbal)
+            </div>
+            <span class="badge-optional">En pruebas</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/granbull.png" class="poke-sprite" alt="Granbull"> Vs. Granbull:</div>
+              <span class="pk-heatran">At. Esp. X</span> + <span class="pk-meloetta">Vozarrón</span> &rarr; <span class="pk-heatran">Calcinación</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/machamp.png" class="poke-sprite" alt="Machamp"> Vs. Machamp:</div>
+              <span class="pk-heatran">At. Esp. X</span> + <span class="pk-meloetta">Vozarrón</span> &rarr; <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/poliwrath.png" class="poke-sprite" alt="Poliwrath"> Vs. Poliwrath:</div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Psíquico</span> (a Poliwrath) &rarr; <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">At. Esp. X</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/breloom.png" class="poke-sprite" alt="Breloom"> Vs. Breloom:</div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Psíquico</span>
+              <span class="priority-note">(Conkeldurr / Poliwrath / no apuntar a Ursaring)</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/hitmonchan.png" class="poke-sprite" alt="Hitmonchan"> Vs. Hitmonchan:</div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">At. Esp. X</span> &rarr; <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Malva -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/pidgeot.png" alt="Pidgeot" class="poke-sprite">
+              6. Ciudad Malva (Pegaso)
+            </div>
+          </div>
+          <div class="default-lead">
+            <strong>Base:</strong> <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-blastoise">Salpicar</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header">Vs. Llovizna (Drizzle):</div>
+              <span class="pk-vanilluxe">Rayo Hielo</span> (al de Llovizna) + <span class="pk-blastoise">Salpicar</span> &rarr; Cambiar <span class="pk-vanilluxe">Vanilluxe</span> por <span class="pk-meloetta">Meloetta</span> + <span class="pk-blastoise">Salpicar</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/pidgeot.png" class="poke-sprite" alt="Pidgeot"> Vs. Pidgeot:</div>
+              <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-blastoise">Velocidad X</span> &rarr; <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-blastoise">Salpicar</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Endrino -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/kingdra.png" alt="Kingdra" class="poke-sprite">
+              7. Ciudad Endrino (Débora)
+            </div>
+          </div>
+          <div class="default-lead">
+            <strong>Base:</strong> <span class="pk-weezing">Explosión</span> + <span class="pk-blastoise">Refuerzo</span> &rarr; <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-meloetta">Vozarrón</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/blastoise.png" class="poke-sprite" alt="Blastoise"> Vs. Blastoise:</div>
+              <span class="pk-weezing">Explosión</span> + <span class="pk-blastoise">Sorpresa</span> (a Blastoise) &rarr; <span class="pk-vanilluxe">Ventisca</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+          </ul>
+          <div class="alert-banner alert-heal">
+            💚 [CURACIÓN #6]
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== 5. SINNOH ==================== -->
+    <section class="region-section" data-region="sinnoh">
+      <div class="region-header">
+        <h2>5. Sinnoh</h2>
+        <span class="region-badge">6 Gimnasios</span>
+      </div>
+
+      <div class="gyms-grid">
+        <!-- Pirita -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/rampardos.png" alt="Rampardos" class="poke-sprite">
+              1. Ciudad Pirita (Roco)
+            </div>
+          </div>
+          <div class="default-lead">
+            <strong>Base:</strong> <span class="pk-blastoise">Salpicar</span> + <span class="pk-weezing">Buena Baza</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/tyranitar.png" class="poke-sprite" alt="Tyranitar">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/excadrill.png" class="poke-sprite" alt="Excadrill">
+                Vs. Tyranitar + Excadrill:
+              </div>
+              <span class="pk-weezing">At. Esp. X</span> + <span class="pk-blastoise">Salpicar</span> &rarr; <span class="pk-blastoise">Salpicar</span> + <span class="pk-weezing">Buena Baza</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/probopass.png" class="poke-sprite" alt="Probopass"> Vs. Probopass:</div>
+              <span class="pk-blastoise">Salpicar</span> + Cambiar <span class="pk-weezing">Weezing</span> por <span class="pk-vanilluxe">Vanilluxe</span> &rarr; <span class="pk-blastoise">Salpicar</span> + <span class="pk-vanilluxe">Ventisca</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Rocavelo -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/lucario.png" alt="Lucario" class="poke-sprite">
+              2. Ciudad Rocavelo (Brega)
+            </div>
+          </div>
+          <div class="default-lead">
+            <strong>Base:</strong> <span class="pk-blastoise">Refuerzo</span> + <span class="pk-typhlosion">Estallido</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/mienshao.png" class="poke-sprite" alt="Mienshao"> Vs. Mienshao:</div>
+              <span class="pk-blastoise">Burbuja</span> + <span class="pk-typhlosion">Estallido</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/breloom.png" class="poke-sprite" alt="Breloom"> Vs. Breloom:</div>
+              <span class="pk-blastoise">At. Esp. X</span> + <span class="pk-typhlosion">Estallido</span> &rarr; <span class="pk-blastoise">Refuerzo</span> + <span class="pk-typhlosion">Estallido</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Marina -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/electivire.png" alt="Electivire" class="poke-sprite">
+              3. Ciudad Marina (Lectro)
+            </div>
+          </div>
+          <div class="default-lead">
+            <strong>Base:</strong> <span class="pk-blastoise">Salpicar</span> + <span class="pk-meloetta">Vozarrón</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/lanturn.png" class="poke-sprite" alt="Lanturn"> Vs. Lanturn:</div>
+              <span class="pk-blastoise">At. Esp. X</span> + <span class="pk-meloetta">Vozarrón</span> &rarr; <span class="pk-blastoise">Salpicar</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Vetusta -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/roserade.png" alt="Roserade" class="poke-sprite">
+              4. Ciudad Vetusta (Gardenia)
+            </div>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/leavanny.png" class="poke-sprite" alt="Leavanny">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/whimsicott.png" class="poke-sprite" alt="Whimsicott">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/rotom.png" class="poke-sprite" alt="Rotom">
+                Vs. Leavanny / Whimsicott / Rotom:
+              </div>
+              <span class="pk-meloetta">Ida y Vuelta</span> + <span class="pk-heatran">Humareda</span> &rarr; <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Humareda</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/roserade.png" class="poke-sprite" alt="Roserade"> Vs. Roserade:</div>
+              <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/ninetales.png" class="poke-sprite" alt="Ninetales"> Vs. Ninetales:</div>
+              <span class="pk-heatran">Calcinación</span> + <span class="pk-meloetta">Vozarrón</span> &rarr; <span class="pk-heatran">Calcinación</span> + Cambiar <span class="pk-meloetta">Meloetta</span> por <span class="pk-weezing">Weezing</span> (<span class="pk-weezing">Buena Baza</span>)
+            </li>
+          </ul>
+        </article>
+
+        <!-- Corazón -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/mismagius.png" alt="Mismagius" class="poke-sprite">
+              5. Ciudad Corazón (Fantina)
+            </div>
+            <span class="badge-optional">Opcional</span>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/misdreavus.png" class="poke-sprite" alt="Misdreavus"> Vs. Misdreavus:</div>
+              <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Humareda</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/marowak.png" class="poke-sprite" alt="Marowak">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/haunter.png" class="poke-sprite" alt="Haunter">
+                Vs. Marowak / Haunter:
+              </div>
+              <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Estallido</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/mismagius.png" class="poke-sprite" alt="Mismagius"> Vs. Mismagius:</div>
+              <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Estallido</span> &rarr; Cambiar <span class="pk-typhlosion">Typhlosion</span> por <span class="pk-weezing">Weezing</span> &rarr; <span class="pk-heatran">Estallido</span> + <span class="pk-weezing">Buena Baza</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/gengar.png" class="poke-sprite" alt="Gengar"> Vs. Gengar:</div>
+              <span class="pk-typhlosion">Humareda</span> + <span class="pk-heatran">Humareda</span> (Vigilar Maldición)
+              <ul class="sub-turns">
+                <li><strong>Sin Maldición:</strong> <span class="pk-typhlosion">Humareda</span> + Cambiar <span class="pk-heatran">Heatran</span> por <span class="pk-weezing">Weezing</span> &rarr; <span class="pk-typhlosion">Humareda</span> + <span class="pk-weezing">Buena Baza</span></li>
+                <li><strong>Si recibe Maldición:</strong> <span class="pk-typhlosion">Forcejeo / debilitar</span> + Cambiar <span class="pk-heatran">Heatran</span> por <span class="pk-blastoise">Blastoise</span>; cuando caiga el de fuego, sacar a <span class="pk-heatran">Heatran</span> con <span class="pk-heatran">Estallido</span></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="alert-banner alert-heal">
+            💚 [CURACIÓN #7]
+          </div>
+        </article>
+
+        <!-- Pradera -->
+        <article class="gym-card">
+          <div class="gym-header">
+            <div class="gym-title">
+              <img src="https://img.pokemondb.net/sprites/black-white/normal/floatzel.png" alt="Floatzel" class="poke-sprite">
+              6. Ciudad Pradera (Mananti)
+            </div>
+          </div>
+          <ul class="matchup-list">
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/sharpedo.png" class="poke-sprite" alt="Sharpedo">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/mantine.png" class="poke-sprite" alt="Mantine">
+                Vs. Sharpedo + Mantine:
+              </div>
+              <span class="pk-typhlosion">Calcinación</span> + <span class="pk-weezing">Explosión</span> &rarr; <span class="pk-heatran">At. Esp. X</span> + <span class="pk-meloetta">Vozarrón</span> &rarr; <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header"><img src="https://img.pokemondb.net/sprites/black-white/normal/ludicolo.png" class="poke-sprite" alt="Ludicolo"> Vs. Ludicolo:</div>
+              <span class="pk-typhlosion">Día Soleado</span> + <span class="pk-weezing">Explosión</span> &rarr; <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/sharpedo.png" class="poke-sprite" alt="Sharpedo">
+                <img src="https://img.pokemondb.net/sprites/black-white/normal/gyarados.png" class="poke-sprite" alt="Gyarados">
+                Vs. Sharpedo + Gyarados:
+              </div>
+              <span class="pk-typhlosion">Calcinación</span> + <span class="pk-weezing">Explosión</span> &rarr; <span class="pk-heatran">Estallido</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+            <li class="matchup-item">
+              <div class="vs-header">Otro caso:</div>
+              <span class="pk-typhlosion">Día Soleado</span> + <span class="pk-weezing">Explosión</span> &rarr; <span class="pk-heatran">Calcinación</span> + <span class="pk-meloetta">Vozarrón</span>
+            </li>
+          </ul>
+          <div class="alert-banner alert-item">
+            ⚠️ ¡¡¡Equipa Pañuelo Elegido (Choice Scarf) a Heatran!!!
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Selector de Temas con guardado en localStorage
+    const themeSelector = document.getElementById('themeSelector');
+    const savedTheme = localStorage.getItem('pokemmo-gym-theme') || 'dark';
+    document.body.setAttribute('data-theme', savedTheme);
+    themeSelector.value = savedTheme;
+
+    themeSelector.addEventListener('change', (e) => {
+      const theme = e.target.value;
+      document.body.setAttribute('data-theme', theme);
+      localStorage.setItem('pokemmo-gym-theme', theme);
+    });
+
+    // Filtro por pestañas de región
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const regionSections = document.querySelectorAll('.region-section');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.getAttribute('data-region');
+
+        regionSections.forEach(sec => {
+          if (target === 'all' || sec.getAttribute('data-region') === target) {
+            sec.classList.remove('hidden');
+          } else {
+            sec.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Buscador en tiempo real
+    const searchInput = document.getElementById('searchInput');
+    const gymCards = document.querySelectorAll('.gym-card');
+
+    searchInput.addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase().trim();
+      gymCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(term) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
